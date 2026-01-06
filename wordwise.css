@@ -1,0 +1,168 @@
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: url('images/background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+header {
+  background: rgba(0,0,0,0.7);
+  padding: 2rem;
+  text-align: center;
+  color: white;
+  text-shadow: 1px 1px 4px #000;
+}
+header h1 { font-size: 3rem; margin-bottom: .5rem; }
+header p { font-size: 1.2rem; }
+
+nav {
+  background: rgba(220, 64, 64, 0.6);
+  padding: 1rem;
+  text-align: center;
+}
+nav a {
+  color: white;
+  text-decoration: none;
+  margin: 0 1rem;
+  font-weight: bold;
+}
+.section {
+  background: rgba(255,255,255,0.9);
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 1000px;
+}
+
+#grammar textarea {
+  width: 100%;
+  height: 150px;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+#grammar button {
+  margin-top: 1rem;
+  padding: .8rem 1.5rem;
+  background: #00bcd4;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+#categories .categories {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.category {
+  width: 200px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+  transition: transform .3s, box-shadow .3s;
+}
+.category:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+}
+.flashcard-section {
+  display: none;
+  text-align: center;
+  margin-top: 2rem;
+}
+.flashcard {
+  width: 300px;
+  height: 190px;
+  margin: auto;
+  perspective: 1000px;
+}
+.card-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform .8s;
+  cursor: pointer;
+}
+.card-inner.flip { transform: rotateY(180deg); }
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  padding: 1rem;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+}
+.card-front { background: rgb(29, 215, 221); color: pink; }
+.card-back {
+  transform: rotateY(180deg);
+  background: #eb27e5;
+  color: white;
+}
+.flashcard-nav {
+  margin: 1rem 0 2rem;
+}
+.flashcard-nav button {
+  margin: 0 .5rem;
+  padding: .6rem 1.2rem;
+  background: #607d8b;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+#add input {
+  width: 100%;
+  padding: .8rem;
+  margin: .5rem 0;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+#add button {
+  padding: .8rem 1.2rem;
+  background: #9aeb3c;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+#games .games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.games-grid a {
+  display: inline-block;
+  margin: 10px;
+  padding: 10px 15px;
+  background: #7767ee;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+}
+.why-section ul {
+  text-align: left;
+  display: inline-block;
+  margin-top: 1rem;
+  line-height: 1.5;
+  font-size: 1rem;
+}

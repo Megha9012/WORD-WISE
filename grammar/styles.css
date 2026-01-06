@@ -1,0 +1,102 @@
+/* General layout and spacing */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Container for overall content */
+  .container {
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Style for buttons */
+  .button {
+    display: inline-block;
+    padding: 12px 25px;
+    margin-top: 15px;
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button:hover {
+    background-color: #45a049;
+  }
+  
+  /* Grammar correction text area */
+  .grammar-correction {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #e8f5e9;
+    border-radius: 8px;
+  }
+  
+  .text-box {
+    width: 100%;
+    height: 200px;
+    padding: 15px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease;
+  }
+  
+  .text-box:focus {
+    border-color: #4CAF50;
+    outline: none;
+  }
+  
+  /* Flashcard input section */
+  .flashcard-section {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #fce4ec;
+    border-radius: 8px;
+  }
+  
+  .flashcard-input,
+  .flashcard-textarea {
+    width: 100%;
+    padding: 15px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    margin-bottom: 15px;
+    transition: border-color 0.3s ease;
+  }
+  
+  .flashcard-input:focus,
+  .flashcard-textarea:focus {
+    border-color: #e91e63;
+    outline: none;
+  }
+  
+  /* Hover effects for flashcard input fields */
+  .flashcard-input:hover,
+  .flashcard-textarea:hover {
+    background-color: #f1f1f1;
+  }
+  
+  /* Flashcard buttons */
+  #add-flashcard {
+    background-color: #e91e63;
+  }
+  
+  #add-flashcard:hover {
+    background-color: #d81b60;
+  }

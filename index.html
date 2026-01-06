@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>WordWise – Advanced English Learning</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="wordwise.css">
+  <script src="wordwise.js" defer></script>
+
+  <style>
+    * { box-sizing: border-box; margin:0; padding:0 }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b') no-repeat center center fixed;
+      background-size: cover;
+      color: #333;
+    }
+    header {
+      background: rgba(79, 20, 20, 0.7);
+      padding: 2rem; text-align: center; color: white;
+      text-shadow: 1px 1px 4px #000;
+    }
+    header h1 { font-size: 3rem; margin-bottom:.5rem }
+    header p  { font-size: 1.2rem }
+
+    nav {
+      background: rgba(0,0,0,0.6);
+      padding: 1rem; text-align: center;
+    }
+    nav a {
+      color: white; text-decoration: none;
+      margin: 0 1rem; font-weight: bold;
+    }
+    .custom-heading {
+  font-weight: bold;
+  color: #0e0e0e; 
+}
+
+
+    .section {
+      background: rgba(255,255,255,0.9);
+      margin: 2rem auto; padding: 2rem;
+      border-radius: 12px; width:90%; max-width: 1000px;
+    }
+
+   
+    .flashcard-section {
+      display: none; text-align:center; margin-top:2rem;
+    }
+    .flashcard {
+      width:300px; height:190px; margin:auto;
+      perspective:1000px;
+    }
+    .card-inner {
+      width:100%; height:100%;
+      position:relative; transform-style:preserve-3d;
+      transition:transform .8s; cursor:pointer;
+    }
+    .card-inner.flip { transform:rotateY(180deg); }
+    .card-front, .card-back {
+      position:absolute; width:100%; height:100%;
+      backface-visibility:hidden; border-radius:12px;
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.2rem; padding:1rem;
+      box-shadow:0 6px 12px rgba(0,0,0,0.3);
+    }
+    .card-front { background:rgb(29, 215, 221); color: rgb(21, 20, 20) }
+    .card-back {
+      transform:rotateY(180deg);
+      background:#e076dd; color:white;
+    }
+    .flashcard-nav {
+      margin:1rem 0 2rem;
+    }
+    .flashcard-nav button {
+      margin:0 .5rem; padding:.6rem 1.2rem;
+      background:#607d8b; color:white;
+      border:none; border-radius:8px; cursor:pointer;
+    }
+
+    #add input {
+      width:100%; padding:.8rem; margin:.5rem 0;
+      border-radius:8px; border:1px solid #ccc;
+    }
+    #add button {
+      padding:.8rem 1.2rem; background:#9aeb3c;
+      color:white; border:none; border-radius:8px; cursor:pointer;
+    }
+   #games {
+  padding: 2rem;
+  background: linear-gradient(135deg, #e8e8e8, #f6f6f6);
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+#games:hover {
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);  
+}
+
+#games h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 1.5rem;
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+#games p {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #555;
+  margin-top: 1rem;
+}
+
+.games-grid {
+  display: flex;
+  justify-content: space-evenly;  
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.game-card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  padding: 2rem;
+  transition: transform 0.3s;
+  cursor: pointer;
+  width: 220px;  
+  min-height: 250px; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.game-card:hover {
+  transform: scale(1.05);
+}
+
+.game-card img {
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  object-fit: cover;
+}
+
+.game-card div {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  margin-top: 0.5rem;
+}
+.game-card.word-puzzle {
+  background-color: #ffcc00; 
+}
+
+.game-card.hangman {
+  background-color: #ff6666; 
+}
+
+.game-card.match-meaning {
+  background-color: #66cc66; 
+}
+
+.game-card.fill-blanks {
+  background-color: #3399ff; 
+}
+
+    
+#games .games-grid {
+  display: grid;
+  grid-template-columns: 1fr;  
+  gap: 1rem;
+  margin-top: 2rem;
+  justify-items: center;  
+}
+#games {
+  padding: 2rem;
+  background: #fff; 
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  margin: 0 auto; 
+  max-width: 1200px; 
+}
+
+#games:hover {
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+#games h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 1.5rem;
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+#games .games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+  justify-items: center;
+}
+
+.game-card {
+  background: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  padding: 2rem;
+  transition: transform 0.3s;
+  cursor: pointer;
+  width: 220px;
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.game-card:hover {
+  transform: scale(1.05);
+}
+
+.game-card img {
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  object-fit: cover;
+}
+
+.game-card h3 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #333;
+  margin-top: 0.5rem;
+}
+
+.game-card.word-puzzle {
+  background-color: #ffcc00;
+}
+
+.game-card.hangman {
+  background-color: #ff6666;
+}
+
+.game-card.match-meaning {
+  background-color: #66cc66;
+}
+
+.game-card.fill-blanks {
+  background-color: #3399ff;
+}
+
+.game-card:hover {
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .game-card {
+    height: 120px;
+  }
+
+  .games-grid {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .game-card {
+    height: 100px;
+  }
+
+  .games-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  }
+}
+
+
+#games .game-card:nth-child(1) {
+  background-color: #2e6490; 
+}
+
+#games .game-card:nth-child(2) {
+  background-color: #f63766;  
+}
+
+#games .game-card:nth-child(3) {
+  background-color: #11caa5; }
+
+#games .game-card:nth-child(4) {
+  background-color: #f6245c;  
+}
+
+.game-card:hover {
+  transform: scale(1.05);
+}
+
+.game-card img {
+  width: 100px;
+  height: 100px;
+  border-radius: 9px;
+  margin-bottom: .5rem;
+  object-fit: cover;
+}
+
+    .game-card:hover {
+      transform: scale(1.1); 
+      box-shadow: 0 10px 20px rgba(105, 226, 244, 0.4);
+    }
+
+    
+    .game-card h3 {
+      font-size: 2.2rem;
+      text-transform: uppercase;
+      font-weight: bold;
+      color: #ffffff;
+      text-shadow: 2px 2px 5px rgb(10, 10, 10);
+    }
+    @media (max-width: 768px) {
+  .game-card {
+    height: 120px;
+  }
+
+  .games-grid {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); 
+  }
+}
+
+
+@media (max-width: 480px) {
+  .game-card {
+    height: 100px;
+  }
+
+  .games-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); 
+  }
+}
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>WordWise</h1>
+    <p>Master English Grammar, Vocabulary & Games</p>
+  </header>
+  <nav>
+    <a href="grammar/grammar.html" target="_blank">Grammar</a> 
+    <a href="#categories">Flashcards</a>
+    <a href="#add">Add Flashcard</a>
+    <a href="#games">Games</a>
+    <a href="login/login.html" target="_blank">Login</a>
+    <a href="grammar/grammar.html" class="button">Go to Grammar Checker</a>
+
+  </nav>
+  <section id="grammar-correction" class="section">
+    <h2>Grammar Correction Tool</h2>
+    <p>Enter a sentence below to check and correct grammar:</p>
+    <textarea id="grammar-input" rows="4" style="width: 100%; padding: 1rem; border-radius: 10px; margin-top: 1rem;"></textarea>
+    <button onclick="correctGrammar()" style="margin-top: 1rem; padding: 0.7rem 1.5rem; background-color: #3f51b5; color: white; border: none; border-radius: 8px;">Correct Grammar</button>
+    <div id="correction-result" style="margin-top: 1rem; font-size: 1.2rem; font-weight: bold;"></div>
+  </section>
+  <section id="categories" class="section">
+    <h2>📚 Flashcard Categories</h2>
+    <div class="categories" id="categoryContainer"></div>
+
+    <div class="flashcard-section" id="flashcardSection">
+      <div class="flashcard" onclick="flipCard()">
+        <div class="card-inner" id="cardInner">
+          <div class="card-front" id="cardFront">Front</div>
+          <div class="card-back" id="cardBack">Back</div>
+        </div>
+      </div>
+      <div class="flashcard-nav">
+        <button onclick="prevCard()">Previous</button>
+        <button onclick="nextCard()">Next</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="add" class="section">
+    <h2>➕ Add Your Own Flashcard</h2>
+    <input type="text" id="newFront" placeholder="Front (word)"><br>
+    <input type="text" id="newBack" placeholder="Back (meaning)"><br>
+    <button onclick="addFlashcard()">Add Flashcard</button>
+    </section>
+    <section id="games">
+      <h1 class="custom-heading">GAMES</h1>
+      <div class="games-grid">
+        <a href="games/hangman/index.html" target="_blank" class="game-card">
+          <img src="images/hangman-image.jpg" alt="Hangman Game" class="game-image">
+          <h3>HANGMAN</h3>
+      </a>
+      <a href="games/word-scramble/index.html" target="_blank" class="game-card">
+          <img src="images/word-scramble-image.jpg" alt="Word Scramble Game" class="game-image">
+          <h3>WORD SCRAMBLE</h3>
+      </a>
+      <a href="games/word-guessing/index.html" target="_blank" class="game-card">
+          <img src="images/word-guessing-image.jpg" alt="Word Guessing Game" class="game-image">
+          <h3>WORD GUESSING</h3>
+      </a>
+      <a href="games/typing-test/index.html" target="_blank" class="game-card">
+          <img src="images/typing-test-image.jpg" alt="Typing Test Game" class="game-image">
+          <h3>TYPING TEST</h3>
+      </a>
+      <a href="games/quiz/index.html" target="_blank" class="game-card">
+          <img src="images/image.jpg" alt="Quiz Game" class="game-image">
+          <h3>QUIZ</h3>
+      </a>
+      </div>
+    </section>
+    
+    </div>
+</section>
+<script src="grammar/grammar.js" defer></script>
+
+  <script>
+   
+    const categories = {
+  "Vocabulary": [
+    ["Aberration", "A departure from what is normal"],
+    ["Eloquent", "Fluent and persuasive"],
+    ["Quixotic", "Idealistic but impractical"],
+    ["Ineffable", "Too great to be expressed in words"],
+    ["Sycophant", "A person who flatters for personal gain"]
+  ],
+  "Idioms": [
+    ["Break the ice", "Initiate conversation"],
+    ["Hit the sack", "Go to bed"],
+    ["Bite the bullet", "Endure something unpleasant"],
+    ["Let the cat out of the bag", "Reveal a secret"],
+    ["Under the weather", "Feeling sick"]
+  ],
+  "Phrases": [
+    ["By all means", "Certainly"],
+    ["In the long run", "Eventually"],
+    ["At the drop of a hat", "Immediately"],
+    ["Out of the blue", "Unexpectedly"],
+    ["Once in a blue moon", "Very rarely"]
+  ],
+  "Synonyms": [
+    ["Happy", "Joyful"],
+    ["Sad", "Melancholy"],
+    ["Fast", "Quick"],
+    ["Angry", "Furious"],
+    ["Big", "Huge"]
+  ],
+  "Antonyms": [
+    ["Hot", "Cold"],
+    ["Up", "Down"],
+    ["Early", "Late"],
+    ["Easy", "Difficult"],
+    ["Light", "Dark"]
+  ],
+  "Business": [
+    ["ROI", "Return on Investment"],
+    ["Synergy", "Combined effort"],
+    ["Benchmark", "Standard for comparison"],
+    ["Entrepreneur", "Person who starts a business"],
+    ["Stakeholder", "Person with interest in a company"]
+  ],
+  "Academic": [
+    ["Thesis", "Research paper"],
+    ["Hypothesis", "Testable idea"],
+    ["Curriculum", "Course of study"],
+    ["Pedagogy", "Art of teaching"],
+    ["Plagiarism", "Copying someone else's work"]
+  ],
+  "Slang": [
+    ["Cool", "Awesome"],
+    ["Ghosted", "Cut communication suddenly"],
+    ["Flex", "Show off"],
+    ["Bail", "Leave abruptly"],
+    ["Salty", "Being upset or bitter"]
+  ],
+  "Collocations": [
+    ["Make a decision", "Correct usage"],
+    ["Take a break", "Correct usage"],
+    ["Catch a cold", "Correct usage"],
+    ["Pay attention", "Correct usage"],
+    ["Save time", "Correct usage"]
+  ],
+  "Proverbs": [
+    ["Time is money", "Time is valuable"],
+    ["Actions speak louder", "Deeds matter more"],
+    ["When in Rome, do as the Romans do", "Adapt to the culture you are in"],
+    ["A stitch in time saves nine", "Fixing early prevents bigger problems"],
+    ["The early bird catches the worm", "Act early to succeed"]
+  ]
+};
+
+    const colors = {
+      "Vocabulary":["#a3d5ff","#067dab"],
+      "Idioms":["#ffb3c6","#c2185b"],
+      "Phrases":["#b8f2e6","#00695c"],
+      "Synonyms":["#e4ffc7","#558b2f"],
+      "Antonyms":["#ffcdd2","#c62828"],
+      "Business":["#d7bfff","#6a1b9a"],
+      "Academic":["#ffd6a5","#ef6c00"],
+      "Slang":["#caffbf","#2e7d32"],
+      "Collocations":["#cde7ff","#1565c0"],
+      "Proverbs":["#ffadad","#b71c1c"]
+    };
+
+    const catContainer  = document.getElementById("categoryContainer");
+    const flashSec      = document.getElementById("flashcardSection");
+    const frontEl       = document.getElementById("cardFront");
+    const backEl        = document.getElementById("cardBack");
+    const innerEl       = document.getElementById("cardInner");
+    let currentCat="", currentIdx=0;
+
+    
+    Object.keys(categories).forEach(cat=>{
+      const d=document.createElement("div");
+      d.className="category";
+      d.innerText=cat;
+      d.style.background=colors[cat][0];
+      d.style.color="#000";
+      d.onclick=()=>openCat(cat);
+      catContainer.appendChild(d);
+    });
+
+    function openCat(cat){
+      currentCat=cat; currentIdx=0;
+      flashSec.style.display="block";
+      updateCard();
+      window.location.hash="#categories";
+    }
+    function updateCard(){
+      const [f,b]=categories[currentCat][currentIdx];
+      frontEl.innerText=f; backEl.innerText=b;
+      frontEl.style.background=colors[currentCat][0];
+      backEl.style.background=colors[currentCat][1];
+      innerEl.classList.remove("flip");
+    }
+    function flipCard(){ innerEl.classList.toggle("flip"); }
+    function nextCard(){
+      currentIdx=(currentIdx+1)%categories[currentCat].length;
+      updateCard();
+    }
+    function prevCard(){
+      currentIdx=(currentIdx-1+categories[currentCat].length)%categories[currentCat].length;
+      updateCard();
+    }
+    function addFlashcard(){
+  const f = document.getElementById("newFront").value.trim();
+  const b = document.getElementById("newBack").value.trim();
+  
+  if(!f || !b){
+    alert("Please fill both fields!");
+    return;
+  }
+
+  if(!categories["Custom"]){
+    categories["Custom"] = [];
+    const d = document.createElement("div");
+    d.className = "category";
+    d.innerText = "Custom";
+    d.style.background = "#ffe680"; 
+    d.style.color = "#000";
+    d.onclick = () => openCat("Custom");
+    catContainer.appendChild(d);
+  }
+
+  categories["Custom"].push([f, b]);
+
+  alert("Flashcard added to Custom category!");
+
+ 
+  openCat("Custom");
+
+  
+  document.getElementById("newFront").value = "";
+  document.getElementById("newBack").value = "";
+}
+
+  </script>
+</body>
+</html>

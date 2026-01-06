@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grammar Check and Add Flashcard</title>
+  <link rel="stylesheet" href="styles.css"> <!-- Linking to the external CSS file -->
+</head>
+<body>
+    <!-- Grammar correction section -->
+<div class="grammar-correction">
+    <h2>Grammar Correction</h2>
+    <textarea id="text-input" placeholder="Paste your text here" class="text-box"></textarea>
+    <button id="check-grammar" class="button">Check Grammar</button>
+    <div id="result"></div> <!-- Display results here -->
+  </div>
+
+    <!-- Display corrected text and suggestions -->
+    <div id="correctedTextContainer" style="display: none;">
+      <h2>Corrected Text:</h2>
+      <p id="correctedText"></p>
+      <div id="suggestionsList"></div>
+      <button id="showFlashcardSection">Add Flashcards</button>
+    </div>
+
+    <!-- Flashcard section -->
+    <div id="flashcardSection" style="display: none;">
+      <h2>Add Flashcards</h2>
+      <input type="text" id="flashcardQuestion" placeholder="Enter Flashcard Question">
+      <input type="text" id="flashcardAnswer" placeholder="Enter Flashcard Answer">
+      <button id="addFlashcardButton">Add Flashcard</button>
+
+      <div id="flashcardsList"></div>
+    </div>
+
+  </div>
+
+  <!-- Including Axios for API calls -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    const checkButton = document.getElementById('checkButton');
+    const inputText = document.getElementById('inputText');
+    const correctedTextContainer = document.getElementById('correctedTextContainer');
+    const correctedText = document.getElementById('correctedText');
+    const suggestionsList = document.getElementById('suggestionsList');
+    const showFlashcardSection = document.getElementById('showFlashcardSection');
+    const flashcardSection = document.getElementById('flashcardSection');
+    const flashcardQuestion = document.getElementById('flashcardQuestion');
+    const flashcardAnswer = document.getElementById('flashcardAnswer');
+    const addFlashcardButton = document.getElementById('addFlashcardButton');
+    const flashcardsList = document.getElementById('flashcardsList');
+
+    // Function to check grammar using LanguageTool API
+    checkButton.addEventListener('click', function () {
+      const text = inputText.value;
+      if (text) {
+        // API call to LanguageTool for grammar check
+        axios.post('https://api.languagetool.org/v2/check', {
+          text: text,
+          language: 'en-US'
+        })
+        .then(function (response) {
+          const matches = response.data.matches;
+          let correctedTextStr = text;
+          suggestionsList.innerHTML = '';
+
+          // Process corrections
+          matches.forEach(match => {
+            const suggestion = match.replacements[0]?.value || "No suggestion";
+            correctedTextStr = correctedTextStr.slice(0, match.offset) +
+                               suggestion +
+                               correctedTextStr.slice(match.offset + match.length);
+
+            // Display suggestion
+            const suggestionElement = document.createElement('div');
+            suggestionElement.classList.add('suggestion');
+            suggestionElement.innerHTML = `<strong>Suggested correction:</strong> ${suggestion} <br><strong>Context:</strong> ${match.context.text}`;
+            suggestionsList.appendChild(suggestionElement);
+          });
+
+          correctedText.textContent = correctedTextStr;
+          correctedTextContainer.style.display = 'block';
+        })
+        .catch(function (error) {
+          console.error('Error in grammar check:', error);
+        });
+      }
+    });
+
+    // Function to show flashcard section after grammar correction
+    showFlashcardSection.addEventListener('click', function () {
+      flashcardSection.style.display = 'block';
+    });
+
+    // Function to add flashcard
+    addFlashcardButton.addEventListener('click', function () {
+      const question = flashcardQuestion.value;
+      const answer = flashcardAnswer.value;
+
+      if (question && answer) {
+        const flashcard = document.createElement('div');
+        flashcard.classList.add('flashcard');
+        flashcard.innerHTML = `
+          <strong>Q: </strong> ${question} <br>
+          <strong>A: </strong> ${answer}
+        `;
+
+        flashcardsList.appendChild(flashcard);
+
+        // Clear the input fields
+        flashcardQuestion.value = '';
+        flashcardAnswer.value = '';
+      }
+    });
+  </script>
+
+</body>
+</html>
