@@ -1,20 +1,37 @@
-📘 WordWise – Interactive English Learning Web Application
+**📘 WordWise – Interactive English Learning Web Application**
 
-WordWise is an interactive, web-based English learning application designed to help users improve their grammar, vocabulary, and language skills through grammar correction tools, flashcard-based learning, and game-based practice.
+WordWise is an interactive, web-based English learning platform designed to make learning grammar, vocabulary, and language skills fun, engaging, and practical through real-time interaction, flashcards, and educational games.
 
-This project focuses on learning by doing, making English learning engaging, practical, and enjoyable through real-time interaction and educational games.
+🌟 Learning English by doing — not memorizing.
 
-🎯 Project Objective
+🧠**About the Project**
 
-The objective of WordWise is to:
+WordWise focuses on hands-on learning using modern web technologies.
+Instead of traditional theory-based learning, users improve their English skills through:
 
-Improve English grammar and vocabulary skills
+✨ Interactive grammar correction
 
-Provide a fun and interactive learning experience
+📚 Visual vocabulary flashcards
 
-Combine education with technology using web development concepts
+🎮 Game-based practice modules
 
-Encourage active learning through games and practice
+⌨️ Typing and word challenges
+
+This project blends education + technology, making language learning enjoyable and effective.
+
+🎯 Project Objectives
+
+The main goals of WordWise are to:
+
+✅ Improve English grammar & vocabulary
+
+🎮 Make learning fun and interactive
+
+💡 Encourage active learning through practice
+
+🌐 Apply real-world web development concepts
+
+🚀 Build a beginner-friendly educational platform
 
 🚀 Key Features
 ✍️ Grammar Learning
@@ -25,40 +42,41 @@ Practice-based learning for grammar rules
 
 📚 Vocabulary Learning
 
-Flashcard-based vocabulary learning
+Flashcard-based vocabulary system
 
-Visual and interactive approach
+Visual & interactive word learning
 
-🎮 Educational Games
+🎮 **Educational Games**
 
 Hangman – Vocabulary & spelling practice
 
-Quiz – Grammar and vocabulary assessment
+Quiz – Grammar & vocabulary assessment
 
-Typing Test – Improve typing speed and accuracy
+Typing Test – Improve typing speed & accuracy
 
-Word Guessing Game – Logical thinking and vocabulary building
+Word Guessing Game – Logical thinking & vocabulary building
 
-Word Scramble – Word formation and spelling skills
+Word Scramble – Word formation & spelling skills
 
-🔐 User Access
+🔐 **User Authentication**
 
-Login and Signup module for structured user access
+Login & Signup system
 
-🎨 User Interface
+Structured user access
 
-Clean, beginner-friendly, and interactive UI
+🎨 **User Interface**
 
-Image-based learning support
+Clean, beginner-friendly UI
+
+Interactive & image-based learning
+
+Easy navigation
 
 🛠️ Technologies Used
-
-HTML – Structure and content
-
-CSS – Styling and layout
-
-JavaScript – Application logic, games, and interactivity
-
+Technology	Purpose
+HTML	Structure & content
+CSS	Styling & layout
+JavaScript	Logic, games & interactivity
 📂 Project Structure
 WORD-WISE Basic/
 │
@@ -73,87 +91,59 @@ WORD-WISE Basic/
 │   ├── word-guessing/
 │   └── word-scramble/
 │
-├── grammar/                # Grammar correction related files
-├── images/                 # Common images and assets
+├── grammar/                # Grammar correction files
+├── images/                 # Images & assets
 └── login&signup/           # User authentication module
 
-🎮 Games Module – Detailed Structure
+**🎮 Games Module – Detailed Structure**
 games/
 │
 ├── hangman/
 │   ├── index.html
 │   ├── style.css
 │   ├── images/
-│   │   ├── hangman-0.svg
-│   │   ├── hangman-1.svg
-│   │   ├── hangman-2.svg
-│   │   ├── hangman-3.svg
-│   │   ├── hangman-4.svg
-│   │   ├── hangman-5.svg
-│   │   ├── hangman-6.svg
-│   │   ├── lost.gif
-│   │   └── victory.gif
 │   └── scripts/
-│       ├── script.js
-│       └── word-list.js
 │
 ├── quiz/
 │   ├── index.html
 │   ├── style.css
 │   └── js/
-│       ├── questions.js
-│       └── script.js
 │
 ├── typing-test/
 │   ├── index.html
 │   ├── style.css
 │   └── js/
-│       ├── paragraphs.js
-│       └── script.js
 │
 ├── word-guessing/
 │   ├── index.html
 │   ├── style.css
 │   └── js/
-│       ├── script.js
-│       └── words.js
 │
 └── word-scramble/
     ├── index.html
     ├── style.css
     └── js/
-        ├── script.js
-        └── words.js
 
-🧠 How the Application Works
+**⚙️ How the Application Works**
 
-Users access the application via index.html
+Users open the app via index.html
 
 Grammar module helps users practice and correct grammar
 
-Flashcards are used for vocabulary learning
+Vocabulary is learned using flashcards
 
-Games reinforce learning through interaction
+Games reinforce learning through interactive challenges
 
-Login and signup allow controlled access to features
+Login & Signup enable controlled access
 
-🌱 Future Enhancements
+**🌱 Future Enhancements**
 
-Save user progress and scores
+📊 Save user progress & game scores
 
-Advanced grammar rules and AI-based correction
+🤖 AI-based grammar correction
 
-Responsive design for mobile devices
+📱 Fully responsive mobile design
 
-More vocabulary categories
+📖 More vocabulary categories
 
-Additional educational games
-
-👩‍💻 Author
-
-Megha Joshi
-Aspiring professional with interest in web development and educational technology
-
-⭐ Conclusion
-
-WordWise is a learning-focused web application that demonstrates practical implementation of HTML, CSS, and JavaScript to build an interactive educational platform. The project highlights problem-solving skills, logical thinking, and user-centric design — making it suitable for placements and entry-level roles.
+🎯 Additional educational games
